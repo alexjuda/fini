@@ -1,5 +1,4 @@
 import os
-from datetime import date, datetime, timezone
 from pathlib import Path
 
 def fini_dir() -> Path:
@@ -15,3 +14,11 @@ def fini_dir() -> Path:
     # this later.
 
     return dir
+
+
+def editor() -> str:
+    try:
+        editor = os.environ["EDITOR"]
+    except KeyError as e:
+        raise ValueError("EDITOR env variable not set") from e
+    return editor
