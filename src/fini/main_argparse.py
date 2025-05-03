@@ -2,7 +2,9 @@ import argparse
 
 
 def _run_edit():
-    print("edit")
+    from .edit import main
+
+    main()
 
 
 def _run_rollover():
