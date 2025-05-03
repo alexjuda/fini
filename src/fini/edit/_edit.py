@@ -10,6 +10,8 @@ def _fini_dir() -> Path:
     except KeyError as e:
         raise ValueError("FINI_DIR env variable not set") from e
 
+    dir = dir.expanduser()
+
     # We could create the directory here if it doesn't exist. However, I think this will not be a common
     # case. I definitely need a git repo, which I probably don't want to create automatically (or do I?). I can revisit
     # this later.
@@ -38,9 +40,6 @@ def _editor() -> str:
 
 def main():
     cmd = [_editor(), _todo_file()]
-    proc = subprocess.run(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    proc = subprocess.run(cmd)
     if proc.returncode != 0:
-        print(f"Running '{cmd}' failed with code {proc.returncode}. Stdout:")
-        print(proc.stdout.decode())
-        print("Stderr:")
-        print(proc.stderr.decode())
+        raise ValueError(f"Running '{cmd}' failed with code {proc.returncode}")
