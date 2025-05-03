@@ -2,21 +2,7 @@ import os
 from datetime import date, datetime, timezone
 from pathlib import Path
 import subprocess
-
-
-def _fini_dir() -> Path:
-    try:
-        dir = Path(os.environ["FINI_DIR"])
-    except KeyError as e:
-        raise ValueError("FINI_DIR env variable not set") from e
-
-    dir = dir.expanduser()
-
-    # We could create the directory here if it doesn't exist. However, I think this will not be a common
-    # case. I definitely need a git repo, which I probably don't want to create automatically (or do I?). I can revisit
-    # this later.
-
-    return dir
+from .._config import fini_dir
 
 
 def _today_date() -> date:
@@ -25,7 +11,7 @@ def _today_date() -> date:
 
 
 def _todo_file() -> Path:
-    dir = _fini_dir()
+    dir = fini_dir()
     today = _today_date()
     return (dir / today.isoformat()).with_suffix(".md")
 
