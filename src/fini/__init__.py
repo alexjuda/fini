@@ -1,2 +1,4 @@
-def main() -> None:
-    print("Hello from fini!")
+from .main import app
+
+
+__all__ = ["app"]
