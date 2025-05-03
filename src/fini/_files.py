@@ -13,3 +13,7 @@ def todo_file() -> Path:
     dir = fini_dir()
     today = _today_date()
     return (dir / today.isoformat()).with_suffix(".md")
+
+
+def all_todo_files() -> list[Path]:
+    pass
