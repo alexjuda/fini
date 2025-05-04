@@ -22,7 +22,6 @@ class TestMain:
 
         return repo
 
-
     @staticmethod
     def test_edited_todo(repo: git.Repo, capsys: pytest.CaptureFixture):
         # Given
@@ -97,7 +96,6 @@ class TestMain:
 
         outerr = capsys.readouterr()
         assert "Skipping" in outerr.out
-
 
     @staticmethod
     @pytest.mark.skip()
