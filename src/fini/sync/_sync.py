@@ -1,2 +1,9 @@
+from .._files import fini_dir
+import git
+
+
 def main():
-    print("Nothing here for now.")
+    repo = git.Repo(fini_dir())
+    if not repo.is_dirty(untracked_files=True):
+        print("Skipping. No changes.")
+        return
