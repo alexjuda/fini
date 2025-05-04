@@ -32,6 +32,13 @@ def _edited_files(repo: git.Repo):
     return sorted(paths)
 
 
+def _push(repo: git.Repo):
+    """
+    Extracted for mocking out in tests.
+    """
+    repo.remote().push()
+
+
 def main():
     repo = git.Repo(fini_dir())
     if not repo.is_dirty(untracked_files=True):
@@ -45,4 +52,7 @@ def main():
     repo.index.commit(f"(fini) Edited {', '.join(names)}")
 
     print("Committed changes.")
-    # TODO: push to remote
+
+    _push(repo)
+
+    print("Pushed.")

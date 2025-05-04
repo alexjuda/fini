@@ -1,7 +1,9 @@
 from pathlib import Path
+from unittest.mock import Mock
 import pytest
 import git
 from ._sync import main
+from . import _sync
 
 
 class TestMain:
@@ -15,6 +17,8 @@ class TestMain:
 
         repo = git.Repo.init(fini_dir)
         repo.index.commit("Initial")
+
+        monkeypatch.setattr(_sync, "_push", Mock())
 
         return repo
 
@@ -36,6 +40,7 @@ class TestMain:
         # Then
         outerr = capsys.readouterr()
         assert "Committed" in outerr.out
+        assert "Pushed" in outerr.out
 
         entry_after = repo.head.log_entry(-1)
         assert entry_after != entry_before
@@ -61,6 +66,7 @@ class TestMain:
         # Then
         outerr = capsys.readouterr()
         assert "Committed" in outerr.out
+        assert "Pushed" in outerr.out
 
         entry_after = repo.head.log_entry(-1)
         assert entry_after != entry_before
@@ -79,6 +85,7 @@ class TestMain:
         # Then
         outerr = capsys.readouterr()
         assert "Committed" in outerr.out
+        assert "Pushed" in outerr.out
 
         entry_after = repo.head.log_entry(-1)
         assert entry_after != entry_before
