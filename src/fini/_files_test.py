@@ -38,16 +38,31 @@ class TestPrevDateTodoFile:
         return dir
 
     @staticmethod
-    def test_no_files():
-        ...
+    def test_no_files(fini_dir):
+        file = prev_day_todo_file()
+
+        assert file is None
 
     @staticmethod
-    def test_today_only():
-        ...
+    @freeze_time(TODAY)
+    def test_today_only(fini_dir: Path):
+        for day in [TODAY]:
+            (fini_dir / day.isoformat()).with_suffix(".md").touch()
+
+        file = prev_day_todo_file()
+
+        assert file is None
 
     @staticmethod
-    def test_no_today():
-        ...
+    @freeze_time(TODAY)
+    def test_no_today(fini_dir: Path):
+        for day in [YESTERDAY, DAY_BEFORE_YESTERDAY]:
+            (fini_dir / day.isoformat()).with_suffix(".md").touch()
+
+        file = prev_day_todo_file()
+
+        assert file is not None
+        assert file.date_ == YESTERDAY
 
     @staticmethod
     @freeze_time(TODAY)
@@ -61,8 +76,12 @@ class TestPrevDateTodoFile:
         assert file.date_ == YESTERDAY
 
     @staticmethod
-    def test_not_matching_filenames():
-        ...
+    def test_not_matching_filenames(fini_dir: Path):
+        (fini_dir / "foo_bar.txt").touch()
+
+        file = prev_day_todo_file()
+
+        assert file is None
 
 
 class TestTodoFile:

@@ -16,13 +16,6 @@ def todo_file() -> Path:
     return (dir / today.isoformat()).with_suffix(".md")
 
 
-# def all_todo_files() -> list[Path]:
-#     ...
-
-
-# def _
-
-
 @dataclass
 class TodoFile:
     path: Path
@@ -38,17 +31,16 @@ class TodoFile:
         return cls(path=path, date_=date_)
 
 
-
 def prev_day_todo_file() -> TodoFile | None:
     dir = fini_dir()
-    todo_files = (
-        file
-        for path in dir.iterdir()
-        if (file := TodoFile.parse_path(path))
-    )
+    todo_files = (file for path in dir.iterdir() if (file := TodoFile.parse_path(path)))
 
     today = _today_date()
     prev_files = (file for file in todo_files if file.date_ != today)
-    yesterday_file = max(prev_files, key=lambda f: f.date_)
+    try:
+        yesterday_file = max(prev_files, key=lambda f: f.date_)
+    except ValueError:
+        # max() raises ValueError when the seq is empty.
+        return None
 
     return yesterday_file
