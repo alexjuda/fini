@@ -10,7 +10,6 @@ def _today_date() -> date:
     return now.date()
 
 
-
 @dataclass
 class TodoFile:
     path: Path
@@ -24,6 +23,7 @@ class TodoFile:
             return None
 
         return cls(path=path, date_=date_)
+
 
 def today_todo_path() -> Path:
     """

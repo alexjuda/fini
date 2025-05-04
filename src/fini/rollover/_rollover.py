@@ -1,6 +1,15 @@
-from .._files import today_todo_path, all_todo_files
+import shutil
+from .._files import today_todo_path, prev_day_todo
 
 
 def main():
-    all_files = set(all_todo_files())
-    prev_files = all_files.difference({today_todo_path})
+    todo_path = today_todo_path()
+
+    if todo_path.exists():
+        raise ValueError(f"Todo file for today already exists: {todo_path}")
+
+    if not (prev_todo := prev_day_todo()):
+        raise ValueError("No prev day todo file found")
+
+    shutil.copy(prev_todo.path, todo_path)
+    print(f"Copied {prev_todo.path.name} to {todo_path.name}")

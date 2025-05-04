@@ -8,7 +8,9 @@ def _run_edit():
 
 
 def _run_rollover():
-    print("edit")
+    from .rollover import main
+
+    main()
 
 
 def _run_sync():
