@@ -14,7 +14,9 @@ def _run_rollover():
 
 
 def _run_sync():
-    print("Nothing here for now.")
+    from .sync import main
+
+    main()
 
 
 def _run_implicit():
