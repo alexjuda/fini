@@ -85,14 +85,6 @@ class TestMain:
         assert entry_after.message == "(fini) Edited 2025-01-02"
 
     @staticmethod
-    def test_added_two_todos(repo: git.Repo):
-        ...
-
-    @staticmethod
-    def test_added_todo_and_edited_other_todo(repo: git.Repo):
-        ...
-
-    @staticmethod
     def test_no_changes(repo: git.Repo, capsys: pytest.CaptureFixture):
         main()
 
@@ -101,5 +93,7 @@ class TestMain:
 
 
     @staticmethod
+    @pytest.mark.skip()
     def test_other_files_changed(repo: git.Repo):
+        # Not sure what should be the behavior yet.
         ...
