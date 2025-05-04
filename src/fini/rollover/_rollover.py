@@ -6,7 +6,8 @@ def main():
     todo_path = today_todo_path()
 
     if todo_path.exists():
-        raise ValueError(f"Todo file for today already exists: {todo_path}")
+        print(f"Skipping. Todo file for today already exists: {todo_path}")
+        return
 
     if not (prev_todo := prev_day_todo()):
         raise ValueError("No prev day todo file found")
