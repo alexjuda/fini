@@ -4,7 +4,8 @@ from .._files import today_todo_path
 
 
 def main():
-    cmd = [editor(), today_todo_path()]
+    cmd = [editor(), str(today_todo_path())]
+    print(f"Launching {cmd}")
     proc = subprocess.run(cmd)
     if proc.returncode != 0:
         raise ValueError(f"Running '{cmd}' failed with code {proc.returncode}")

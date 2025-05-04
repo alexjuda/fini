@@ -14,7 +14,18 @@ def _run_rollover():
 
 
 def _run_sync():
-    print("sync")
+    print("Nothing here for now.")
+
+
+def _run_implicit():
+    print("[rollover]")
+    _run_rollover()
+
+    print("[edit]")
+    _run_edit()
+
+    print("[sync]")
+    _run_sync()
 
 
 def _parser():
@@ -40,3 +51,6 @@ def app():
 
         case "sync":
             _run_sync()
+
+        case _:
+            _run_implicit()
