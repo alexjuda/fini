@@ -10,11 +10,6 @@ def _today_date() -> date:
     return now.date()
 
 
-def todo_file() -> Path:
-    dir = fini_dir()
-    today = _today_date()
-    return (dir / today.isoformat()).with_suffix(".md")
-
 
 @dataclass
 class TodoFile:
@@ -30,8 +25,19 @@ class TodoFile:
 
         return cls(path=path, date_=date_)
 
+def today_todo_path() -> Path:
+    """
+    Doesn't matter if the file exists.
+    """
+    dir = fini_dir()
+    today = _today_date()
+    return (dir / today.isoformat()).with_suffix(".md")
 
-def prev_day_todo_file() -> TodoFile | None:
+
+def prev_day_todo() -> TodoFile | None:
+    """
+    Returns `TodoFile` only if that file exists.
+    """
     dir = fini_dir()
     todo_files = (file for path in dir.iterdir() if (file := TodoFile.parse_path(path)))
 

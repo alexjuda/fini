@@ -3,16 +3,15 @@ import pytest
 import re
 from datetime import date
 from freezegun import freeze_time
-from ._files import TodoFile, todo_file, prev_day_todo_file
+from ._files import TodoFile, today_todo_path, prev_day_todo
 
 
-# TODO: rename that function
-class TestTodoFileFn:
+class TestTodayTodo:
     @staticmethod
     def test_path_looks_legit(monkeypatch: pytest.MonkeyPatch):
         monkeypatch.setenv("FINI_DIR", "/home/alex/Documents/todos")
 
-        file_path = todo_file()
+        file_path = today_todo_path()
 
         assert (
             re.match(
@@ -28,7 +27,7 @@ YESTERDAY = date.fromisoformat("2025-02-02")
 TODAY = date.fromisoformat("2025-02-03")
 
 
-class TestPrevDateTodoFile:
+class TestPrevDateTodo:
     @staticmethod
     @pytest.fixture
     def fini_dir(monkeypatch: pytest.MonkeyPatch, tmp_path: Path) -> Path:
@@ -39,7 +38,7 @@ class TestPrevDateTodoFile:
 
     @staticmethod
     def test_no_files(fini_dir):
-        file = prev_day_todo_file()
+        file = prev_day_todo()
 
         assert file is None
 
@@ -49,7 +48,7 @@ class TestPrevDateTodoFile:
         for day in [TODAY]:
             (fini_dir / day.isoformat()).with_suffix(".md").touch()
 
-        file = prev_day_todo_file()
+        file = prev_day_todo()
 
         assert file is None
 
@@ -59,7 +58,7 @@ class TestPrevDateTodoFile:
         for day in [YESTERDAY, DAY_BEFORE_YESTERDAY]:
             (fini_dir / day.isoformat()).with_suffix(".md").touch()
 
-        file = prev_day_todo_file()
+        file = prev_day_todo()
 
         assert file is not None
         assert file.date_ == YESTERDAY
@@ -70,7 +69,7 @@ class TestPrevDateTodoFile:
         for day in [TODAY, YESTERDAY, DAY_BEFORE_YESTERDAY]:
             (fini_dir / day.isoformat()).with_suffix(".md").touch()
 
-        file = prev_day_todo_file()
+        file = prev_day_todo()
 
         assert file is not None
         assert file.date_ == YESTERDAY
@@ -79,7 +78,7 @@ class TestPrevDateTodoFile:
     def test_not_matching_filenames(fini_dir: Path):
         (fini_dir / "foo_bar.txt").touch()
 
-        file = prev_day_todo_file()
+        file = prev_day_todo()
 
         assert file is None
 
