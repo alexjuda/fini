@@ -34,9 +34,12 @@ def _parser():
     parser = argparse.ArgumentParser()
 
     subparser = parser.add_subparsers(dest="command")
-    _ = subparser.add_parser("edit")
-    _ = subparser.add_parser("rollover")
-    _ = subparser.add_parser("sync")
+    _ = subparser.add_parser("edit", help="Opens a daily todo file in your $EDITOR.")
+    _ = subparser.add_parser(
+        "rollover",
+        help="Finds the todo file from a previous day and copies over for today.",
+    )
+    _ = subparser.add_parser("sync", help="Makes a commit & pushes to origin.")
 
     return parser
 
