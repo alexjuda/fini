@@ -3,6 +3,7 @@ name = "fini"
 version = "0.1.0"
 description = "Tiny CLI for hard working ants"
 readme = "README.md"
+license = "Apache-2.0"
 authors = [
     { name = "alexjuda", email = "alexanderjuda@gmail.com" }
 ]
