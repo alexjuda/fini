@@ -1,6 +1,7 @@
 import os
 from pathlib import Path
 
+
 def fini_dir() -> Path:
     try:
         dir = Path(os.environ["FINI_DIR"])

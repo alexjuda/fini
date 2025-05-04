@@ -10,4 +10,10 @@ class TestTodoFile:
 
         file_path = todo_file()
 
-        assert re.match(r"/home/alex/Documents/todos/\d{4}-\d{2}-\d{2}.md", str(file_path.absolute())) is not None
+        assert (
+            re.match(
+                r"/home/alex/Documents/todos/\d{4}-\d{2}-\d{2}.md",
+                str(file_path.absolute()),
+            )
+            is not None
+        )

@@ -34,7 +34,6 @@ class TestEditor:
         with pytest.raises(ValueError):
             editor()
 
-
     @staticmethod
     def test_with_env_var(monkeypatch: pytest.MonkeyPatch):
         monkeypatch.setenv("EDITOR", "nvim")
