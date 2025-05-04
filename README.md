@@ -12,7 +12,7 @@ over unfinished todos from the previous day. Keep files under a git repo synchro
 ```bash
 export FINI_DIR="~/Documents/fini-todos"
 
-# Opens up a daily todo file in your $EDITOR
+# Opens up a daily todo file in your $EDITOR.
 fini edit
 
 # Makes a commit & pushes to origin.
