@@ -67,8 +67,22 @@ class TestMain:
         assert entry_after.message == "(fini) Edited 2025-01-01, 2025-01-02"
 
     @staticmethod
-    def test_added_todo_file(repo: git.Repo):
-        ...
+    def test_added_todo_file(repo: git.Repo, capsys: pytest.CaptureFixture):
+        # Given
+        todo_path = Path(repo.working_dir) / "2025-01-02.md"
+        todo_path.write_text("Hello!")
+        entry_before = repo.head.log_entry(-1)
+
+        # When
+        main()
+
+        # Then
+        outerr = capsys.readouterr()
+        assert "Committed" in outerr.out
+
+        entry_after = repo.head.log_entry(-1)
+        assert entry_after != entry_before
+        assert entry_after.message == "(fini) Edited 2025-01-02"
 
     @staticmethod
     def test_added_two_todos(repo: git.Repo):

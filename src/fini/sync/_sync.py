@@ -4,7 +4,10 @@ from .._files import fini_dir
 import git
 
 
-def _edited_files(diff_index: git.DiffIndex):
+def _edited_files(repo: git.Repo):
+    diff_index = repo.index.diff(None)
+    untracked_files = repo.untracked_files
+
     paths = []
     for file_diff in itertools.chain(
         # Added
@@ -23,6 +26,9 @@ def _edited_files(diff_index: git.DiffIndex):
         assert file_diff.b_rawpath is not None
         paths.append(Path(file_diff.b_rawpath.decode()))
 
+    for untracked_file in untracked_files:
+        paths.append(Path(untracked_file))
+
     return sorted(paths)
 
 
@@ -32,8 +38,7 @@ def main():
         print("Skipping. No changes.")
         return
 
-    diff_index = repo.index.diff(None)
-    paths = _edited_files(diff_index)
+    paths = _edited_files(repo)
     names = [p.stem for p in paths]
 
     repo.git.add(all=True)
