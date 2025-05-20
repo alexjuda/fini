@@ -1,5 +1,7 @@
 from pathlib import Path
 
+import pytest
+
 from ._rollover import rollover_file
 
 
@@ -8,11 +10,17 @@ TEST_DATA = Path(__file__).parent / "test_data"
 
 class TestRolloverFile:
     @staticmethod
-    def test_one_todo(tmp_path: Path):
-        file_in = TEST_DATA / "one_todo" / "in.md"
+    @pytest.mark.parametrize(
+        "test_name",
+        [
+            "one_todo",
+        ],
+    )
+    def test_predefined_file_pair(tmp_path: Path, test_name: str):
+        file_in = TEST_DATA / test_name / "in.md"
+        file_expected = TEST_DATA / test_name / "expected_out.md"
         file_out = tmp_path / "out.md"
-        file_expected = TEST_DATA / "one_todo" / "expected_out.md"
 
         rollover_file(file_in, file_out)
 
-        assert file_expected.read_text() == "* [ ] hello\n"
+        assert  file_out.read_text() == file_expected.read_text()
