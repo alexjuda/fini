@@ -14,6 +14,11 @@ class TestRolloverFile:
         "test_name",
         [
             "one_todo",
+            "some_done",
+            # "multiline_paragraph",
+            # "nested_list",
+            # "headers",
+            # "plain_text",
         ],
     )
     def test_predefined_file_pair(tmp_path: Path, test_name: str):
