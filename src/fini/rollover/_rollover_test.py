@@ -1,24 +1,18 @@
 from pathlib import Path
 
-from pytest import fixture
 from ._rollover import rollover_file
 
 
+TEST_DATA = Path(__file__).parent / "test_data"
+
+
 class TestRolloverFile:
-    @fixture
     @staticmethod
-    def file_in(tmp_path: Path) -> Path:
-        return tmp_path / "in.md"
-
-    @fixture
-    @staticmethod
-    def file_out(tmp_path: Path) -> Path:
-        return tmp_path / "out.md"
-
-    @staticmethod
-    def test_simplest(file_in: Path, file_out: Path):
-        file_in.write_text("* [ ] hello\n")
+    def test_one_todo(tmp_path: Path):
+        file_in = TEST_DATA / "one_todo" / "in.md"
+        file_out = tmp_path / "out.md"
+        file_expected = TEST_DATA / "one_todo" / "expected_out.md"
 
         rollover_file(file_in, file_out)
 
-        assert file_out.read_text() == "* [ ] hello\n"
+        assert file_expected.read_text() == "* [ ] hello\n"
