@@ -1,2 +1,2 @@
-* [ ] task1
-* [ ] task3
+- [ ] task1
+- [ ] task3

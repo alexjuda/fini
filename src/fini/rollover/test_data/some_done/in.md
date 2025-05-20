@@ -1,4 +1,4 @@
-* [ ] task1
-* [x] task2
-* [ ] task3
-* [x] task4
+- [ ] task1
+- [x] task2
+- [ ] task3
+- [x] task4
