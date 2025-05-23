@@ -17,8 +17,27 @@ def line_indent(line: str) -> int:
 
 def rollover_file(prev_path: Path, new_path: Path):
     with prev_path.open() as f_in, new_path.open("w") as f_out:
+        done_section_indent = None
         for line in f_in:
-            match = DONE_TASK.match(line)
+            current_indent = line_indent(line)
+
+            if done_section_indent is not None:
+                if done_section_indent < current_indent:
+                    continue
+                else:
+                    # We're past the section.
+                    done_section_indent = None
+
+            match = DONE_TASK_PATTERN.match(line)
+            # Find out the indentation of the section we want to remove.
+            if (
+                # When the first line matches '* [x]'
+                match
+                # When we aren't already in a nested section.
+                and not done_section_indent
+            ):
+                done_section_indent = match.start(1)
+
             if not match:
                 f_out.write(line)
 
