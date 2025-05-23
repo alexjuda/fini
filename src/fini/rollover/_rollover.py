@@ -15,7 +15,7 @@ def line_indent(line: str) -> int:
     return match.start(1)
 
 
-def rollover_file(prev_path: Path, new_path: Path):
+def _drop_done(prev_path: Path, new_path: Path):
     with prev_path.open() as f_in, new_path.open("w") as f_out:
         done_section_indent = None
         for line in f_in:
@@ -40,6 +40,17 @@ def rollover_file(prev_path: Path, new_path: Path):
 
             if not match:
                 f_out.write(line)
+
+
+def _drop_multi_empty_lines(path: Path):
+    text = path.read_text()
+    fixed_text = re.sub(r"\n\n+", "\n\n", text)
+    path.write_text(fixed_text)
+
+
+def rollover_file(prev_path: Path, new_path: Path):
+    _drop_done(prev_path, new_path)
+    _drop_multi_empty_lines(new_path)
 
 
 def main():

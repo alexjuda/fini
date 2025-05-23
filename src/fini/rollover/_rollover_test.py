@@ -28,6 +28,7 @@ class TestRolloverFile:
             "list_formats",
             "nested_lists",
             "multiline_paragraph",
+            "empty_lines",
             # "headers",
             # "plain_text",
         ],
