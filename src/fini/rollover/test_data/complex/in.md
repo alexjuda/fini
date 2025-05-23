@@ -4,12 +4,12 @@
 * [x] task2
     * [x] sub21
     * [x] sub22
-* [ ] task3
-    * [ ] sub31
-    * [x] sub32
+- [ ] task3
+    - [ ] sub31
+    - [x] sub32
 * [x] task4
     * [ ] sub31
-    * [x] sub32
+    - [x] sub32
 * [x] task5. This can contain
       multiple lines.
 
