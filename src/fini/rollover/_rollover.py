@@ -7,7 +7,7 @@ from .._files import prev_day_todo, today_todo_path
 def rollover_file(prev_path: Path, new_path: Path):
     with prev_path.open() as f_in, new_path.open("w") as f_out:
         for line in f_in:
-            if not re.match(r"^\s*- +\[x]", line):
+            if not re.match(r"^\s*[-\*] +\[x]", line):
                 f_out.write(line)
 
 

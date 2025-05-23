@@ -15,6 +15,7 @@ class TestRolloverFile:
         [
             "one_todo",
             "some_done",
+            "list_formats",
             # "multiline_paragraph",
             # "nested_list",
             # "headers",
