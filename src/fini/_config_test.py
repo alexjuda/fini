@@ -4,7 +4,9 @@ from ._config import fini_dir, editor
 
 class TestFiniDir:
     @staticmethod
-    def test_no_env_var():
+    def test_no_env_var(monkeypatch: pytest.MonkeyPatch):
+        monkeypatch.setenv("FINI_DIR", "")
+
         with pytest.raises(ValueError):
             fini_dir()
 

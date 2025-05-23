@@ -3,11 +3,11 @@ from pathlib import Path
 
 
 def fini_dir() -> Path:
-    try:
-        dir = Path(os.environ["FINI_DIR"])
-    except KeyError as e:
-        raise ValueError("FINI_DIR env variable not set") from e
+    dir_str = os.environ.get("FINI_DIR", "")
+    if not dir_str:
+        raise ValueError("FINI_DIR env variable not set")
 
+    dir = Path(dir_str)
     dir = dir.expanduser()
 
     # We could create the directory here if it doesn't exist. However, I think this will not be a common
