@@ -10,8 +10,6 @@ authors = [
 requires-python = ">=3.11"
 dependencies = [
     "gitpython>=3.1.44",
-    "markdown-it-py>=3.0.0",
-    "mdformat>=0.7.22",
 ]
 
 [project.scripts]

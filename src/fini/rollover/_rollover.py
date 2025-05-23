@@ -1,15 +1,12 @@
 from pathlib import Path
-from markdown_it import MarkdownIt
-from mdformat.renderer import MDRenderer
 from .._files import today_todo_path, prev_day_todo
 
 
-def rollover_file(prev_path: Path, new_path: Path):
-    md = MarkdownIt()
-    tokens = md.parse(prev_path.read_text())
 
-    renderer = MDRenderer()
-    cleaned_text = renderer.render(tokens, options={}, env={})
+def rollover_file(prev_path: Path, new_path: Path):
+    in_text = prev_path.read_text()
+    cleaned_text = in_text
+
     new_path.write_text(cleaned_text)
 
 
