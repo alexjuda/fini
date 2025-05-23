@@ -4,7 +4,15 @@ from pathlib import Path
 from .._files import prev_day_todo, today_todo_path
 
 
-DONE_TASK = re.compile(r"^\s*[-\*] +\[x]")
+DONE_TASK_PATTERN = re.compile(r"^\s*([-\*]) +\[x]")
+INDENT_PATTERN = re.compile(r"^\s*(\S)")
+
+
+def line_indent(line: str) -> int:
+    match = INDENT_PATTERN.match(line)
+    if not match:
+        return 0
+    return match.start(1)
 
 
 def rollover_file(prev_path: Path, new_path: Path):

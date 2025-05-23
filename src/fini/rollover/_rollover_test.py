@@ -2,10 +2,20 @@ from pathlib import Path
 
 import pytest
 
-from ._rollover import rollover_file
+from ._rollover import line_indent, rollover_file
 
 
 TEST_DATA = Path(__file__).parent / "test_data"
+
+
+class TestLineIndent:
+    @staticmethod
+    def test_sample():
+        assert line_indent("    *") == 4
+
+    @staticmethod
+    def test_empty():
+        assert line_indent("") == 0
 
 
 class TestRolloverFile:
