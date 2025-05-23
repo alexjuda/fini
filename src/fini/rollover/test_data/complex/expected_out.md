@@ -1,8 +1,9 @@
 # Today
 
 * [ ] task1
-* [ ] task3
-    * [ ] sub31
+- [ ] task3
+    - [ ] sub31
+
 * [ ] task6. This can contain
       multiple lines.
 
