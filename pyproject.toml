@@ -1,6 +1,6 @@
 [project]
 name = "fini"
-version = "0.1.0"
+version = "0.2.0"
 description = "Tiny CLI for hard working ants"
 readme = "README.md"
 license = "Apache-2.0"
