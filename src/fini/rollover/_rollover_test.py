@@ -42,4 +42,4 @@ class TestRolloverFile:
 
         rollover_file(file_in, file_out)
 
-        assert  file_out.read_text() == file_expected.read_text()
+        assert file_out.read_text() == file_expected.read_text()
