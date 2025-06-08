@@ -4,7 +4,7 @@ from pathlib import Path
 from .._files import prev_day_todo, today_todo_path
 
 
-DONE_TASK_PATTERN = re.compile(r"^\s*([-\*]) +\[x]")
+DONE_TASK_PATTERN = re.compile(r"^\s*((?:[-\*])|(?:\d*\.)) +\[x]")
 INDENT_PATTERN = re.compile(r"^\s*(\S)")
 
 

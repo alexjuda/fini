@@ -32,6 +32,7 @@ class TestRolloverFile:
             "headers",
             "plain_text",
             "complex",
+            "numbered_list",
         ],
     )
     def test_predefined_file_pair(tmp_path: Path, test_name: str):
