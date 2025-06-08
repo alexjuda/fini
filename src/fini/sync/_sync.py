@@ -39,12 +39,7 @@ def _push(repo: git.Repo):
     repo.remote().push()
 
 
-def main():
-    repo = git.Repo(fini_dir())
-    if not repo.is_dirty(untracked_files=True):
-        print("Skipping. No changes.")
-        return
-
+def _commit(repo: git.Repo):
     paths = _edited_files(repo)
     names = [p.stem for p in paths]
 
@@ -52,6 +47,15 @@ def main():
     repo.index.commit(f"(fini) Edited {', '.join(names)}")
 
     print("Committed changes.")
+
+
+def main():
+    repo = git.Repo(fini_dir())
+    if not repo.is_dirty(untracked_files=True):
+        print("Skipping. No changes.")
+        return
+
+    _commit(repo)
 
     _push(repo)
 
